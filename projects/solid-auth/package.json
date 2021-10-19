@@ -1,0 +1,22 @@
+{
+  "name": "ngx-solid",
+  "author": {
+    "name" : "Mads Holten Rasmussen",
+    "email" : "mads.h.rasmussen@gmail.com",
+    "url" : "https://www.linkedin.com/in/mads-holten-rasmussen-061b7414/"
+  },
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^12.2.0",
+    "@angular/core": "^12.2.0",
+    "@inrupt/solid-client": "^1.14.0",
+    "@inrupt/solid-client-authn-browser": "^1.11.2",
+    "@inrupt/vocab-common-rdf": "^1.0.3",
+    "rdf-namespaces": "^1.9.2",
+    "buffer": "^6.0.3",
+    "url-join-ts": "^1.0.5"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}

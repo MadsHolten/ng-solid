@@ -1,0 +1,81 @@
+<div style="height: inherit; width: 100%" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
+
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
+        
+        <button *ngIf="!isLoggedIn" mat-stroked-button [matMenuTriggerFor]="menu">Choose provider</button>
+        <mat-menu #menu="matMenu">
+          <button *ngFor="let item of loginOptions" mat-menu-item (click)="login(item.value)">
+              {{item.title}}
+          </button>
+          <button mat-menu-item (click)="useOwnIP = !useOwnIP">Own</button>
+        </mat-menu>
+
+        <button *ngIf="isLoggedIn" mat-stroked-button (click)="logout()">LogOut</button>
+        <button *ngIf="isLoggedIn" mat-stroked-button (click)="onShowProfile()">Profile</button>
+        <button *ngIf="isLoggedIn" mat-stroked-button routerLink="/data">Add data</button>
+
+    </div>
+
+    <!-- USE OWN IDENTITY PROVIDER -->
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" *ngIf="useOwnIP">
+
+        <mat-form-field style="width: 100%" appearance="fill">
+            <mat-label>Identity Provider</mat-label>
+            <input matInput [(ngModel)]="identityProvider">
+        </mat-form-field>
+
+        <button mat-stroked-button (click)="login(identityProvider)">LogIn</button>
+
+    </div>
+
+    <!-- SHOW PROFILE -->
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" *ngIf="showProfile && profile">
+
+        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+
+            <p>Name: {{profile.fn}}</p>
+
+            <img *ngIf="profile.photo" style="max-height: 150px;" [attr.src]="profile.photo | auth | async">
+
+            <ng-container *ngIf="typeIndexes">
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                    <a [href]="typeIndexes.privateIndex">Private type index (unauthorized)</a> <button mat-stroked-button (click)="getDataset(typeIndexes.privateIndex)">Read</button>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                    <a [href]="typeIndexes.publicIndex">Public type index</a> <button mat-stroked-button (click)="getDataset(typeIndexes.publicIndex)">Read</button>
+                </div>
+            </ng-container>
+
+        </div>
+        
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" *ngIf="fileContent">
+        <ngx-codemirror
+            [(ngModel)]="fileContent"
+            [options]="cmConfig"
+        ></ngx-codemirror>
+    </div>
+
+    <!-- <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" *ngIf="isLoggedIn">
+
+        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+        
+            <p>Listen to resource changes</p>
+
+            <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="10px">
+
+                <mat-form-field style="width: 100%" appearance="fill">
+                    <mat-label>Resource URI</mat-label>
+                    <input matInput [(ngModel)]="resourceURL">
+                </mat-form-field>
+
+                <button *ngIf="resourceURL" mat-stroked-button (click)="subscribeTo(resourceURL)">Subscribe</button>
+
+            </div>
+
+        </div>
+
+    </div> -->
+
+</div>

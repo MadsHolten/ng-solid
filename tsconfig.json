@@ -14,6 +14,13 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "skipLibCheck": true,
+    "paths": {
+      "solid-auth": [
+        "dist/solid-auth/solid-auth",
+        "dist/solid-auth"
+      ]
+    },
     "target": "es2017",
     "module": "es2020",
     "lib": [

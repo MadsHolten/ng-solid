@@ -1,0 +1,15 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/solid-auth",
+  "lib": {
+    "entryFile": "src/public-api.ts"
+  },
+  "whitelistedNonPeerDependencies": [
+    "@inrupt/solid-client",
+    "@inrupt/solid-client-authn-browser",
+    "@inrupt/vocab-common-rdf",
+    "rdf-namespaces",
+    "buffer",
+    "url-join-ts"
+  ]
+}

@@ -1,0 +1,57 @@
+<div style="height: inherit; width: 100%" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
+
+    <!-- SET ROOT -->
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+
+        <mat-form-field style="width: 100%" appearance="fill">
+            <mat-label>Root URI</mat-label>
+            <input matInput [(ngModel)]="rootURI">
+        </mat-form-field>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
+        <button mat-stroked-button *ngIf="!publicFolderExists" (click)="addPublicContainer()">Add public container</button>
+        <button mat-stroked-button *ngIf="publicFolderExists" (click)="deletePublicContainer()">Delete public container</button>
+        <button mat-stroked-button *ngIf="!privateFolderExists" (click)="addPrivateContainer()">Add private container</button>
+        <button mat-stroked-button *ngIf="privateFolderExists" (click)="deletePrivateContainer()">Delete private container</button>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px" *ngIf="publicFolderExists">
+
+        <h2>ICDD</h2>
+        <p>This method instantiates an ICDD in the public folder</p>
+
+        <mat-form-field style="width: 100%" appearance="fill">
+            <mat-label>ICDD Name</mat-label>
+            <input matInput [(ngModel)]="icddName">
+        </mat-form-field>
+
+        <button mat-stroked-button (click)="initICDD()">Init ICDD</button>
+
+        <h3>Payload files</h3>
+        <ngx-dropzone (change)="onSelect($event)">
+            <ngx-dropzone-label>Drop payload files here!</ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+        </ngx-dropzone>
+
+        <button mat-stroked-button *ngIf="files.length" (click)="uploadPayloadFiles()">Upload Payload files</button>
+
+        <i>Todo: Load files in the ICDD</i>
+
+    </div>
+
+    <!-- <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" *ngIf="useOwnIP">
+
+        <mat-form-field style="width: 100%" appearance="fill">
+            <mat-label>Identity Provider</mat-label>
+            <input matInput [(ngModel)]="identityProvider">
+        </mat-form-field>
+
+        <button mat-stroked-button (click)="addContainer(identityProvider)">LogIn</button>
+
+    </div> -->
+
+</div>
