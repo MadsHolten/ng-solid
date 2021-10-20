@@ -46,7 +46,7 @@ export class SolidDataService {
         console.log(`File saved at ${getSourceUrl(savedFile)}`);
 
         if(makePublic){
-            await this._as.makePublic(targetFileURL);
+            await this._as.makeFilePublic(targetFileURL);
         }
 
         return savedFile;
